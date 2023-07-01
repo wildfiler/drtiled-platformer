@@ -1,0 +1,6 @@
+devid=wildfiler
+devtitle=Ivan Arakcheiev
+gameid=tiled-platformer
+gametitle=Tiled-platformer example
+version=0.1
+icon=metadata/icon.png
