@@ -25,12 +25,57 @@ class Tiled::ImageLayer
       when 'properties'
         properties.from_xml_hash(child[:children])
       when 'image'
-        puts child
         @image = Tiled::Image.new(map)
         image.from_xml_hash(child)
       end
     end
 
     self
+  end
+
+  def visible?
+    visible
+  end
+
+  def animated_sprites
+    []
+  end
+
+  def sprites
+    return [sprite] unless repeatx || repeaty
+
+    y_times.times.flat_map do |y_index|
+      x_times.times.map do |x_index|
+        sprite(x_index, y_index)
+      end
+    end
+  end
+
+  def collision_objects
+    []
+  end
+
+  private
+
+  def sprite(x_index = 0, y_index = 0)
+    {
+      x: x_index * image.w + offset.x,
+      y: map.pixelheight - (y_index + 1) * image.h + offset.y,
+      w: image.w,
+      h: image.h,
+      path: image.path
+    }
+  end
+
+  def x_times
+    return 1 unless repeatx
+
+    (map.pixelwidth / image.w).ceil.to_i + 1
+  end
+
+  def y_times
+    return 1 unless repeaty
+
+    (map.pixelheight / image.h).ceil.to_i
   end
 end

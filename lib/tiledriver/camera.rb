@@ -6,6 +6,7 @@ module Tiled
   # Controller for a camera which moves around the map. It points to the pixel on the map
   # that is rendered to the lower-left pixel of the screen.
   class Camera
+    include Tiled::Serializable
     attr_reader :rect, :zoom, :deadzone
 
     def initialize(args, map)

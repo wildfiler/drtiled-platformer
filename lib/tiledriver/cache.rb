@@ -118,7 +118,7 @@ module Tiled
         render_target = layer_render_target(:"map_layer_#{layer.id}")
 
         case layer
-        when Layer
+        when Layer, ImageLayer
           render_target << layer.sprites
         when ObjectLayer
           layer.objects.each do |object|

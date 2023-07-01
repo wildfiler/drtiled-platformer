@@ -36,7 +36,7 @@ module Tiled
     # @param layer [Tiled::Layer || Tiled::ObjectLayer] the layer to render
     # @option :target [Symbol || GTK::OutputsArray] the output target
     def render_layer(layer, target: :primitives)
-      layer = map.layers[layer.to_s] unless [Layer, ObjectLayer].any? { |cls| layer.is_a? cls }
+      layer = map.layers[layer.to_s] unless [Layer, ObjectLayer, ImageLayer].any? { |cls| layer.is_a? cls }
       return unless layer&.visible?
 
       target = get_target(target)
